@@ -7,6 +7,46 @@ Structured AI development operating system for disciplined, risk-aware execution
 ![AI System](https://img.shields.io/badge/type-AI%20Operating%20System-purple)
 ![Architecture](https://img.shields.io/badge/architecture-MemoryCore%20OS-orange)
 
+## Quick Start
+
+### AI Coding Agent Instruction
+
+For best results, add the Sentinel AI instruction to your AI coding tool.
+
+- [docs/ai-coding-instruction.md](docs/ai-coding-instruction.md)
+
+Best setup:
+
+- Repo files + AI coding instruction + `Activate Sentinel AI` command
+
+### Option 1 - Manual Clone
+
+```bash
+git clone https://github.com/shzdev/Sentinel-AI-Memory.git
+cd Sentinel-AI-Memory
+```
+
+Then start your AI session with:
+
+```text
+Activate Sentinel AI
+```
+
+You can combine activation and task in a single message.
+
+### Option 2 - Let AI Coding Agent Clone It
+
+```text
+Clone and set up this repository:
+https://github.com/shzdev/Sentinel-AI-Memory.git
+
+After cloning, activate Sentinel AI by reading:
+.sentinel-ai/boot-instruction.md
+
+Then link:
+See full activation guide: [docs/activation.md](docs/activation.md)
+```
+
 ## The Problem
 
 Most AI coding setups are optimized for speed, not reliability.
@@ -266,6 +306,8 @@ Short version:
 2. Review `master-memory.md`
 3. Inspect the files under `main/`
 4. Use the system on a real task and follow the mode guidance
+
+See full activation guide: [docs/activation.md](docs/activation.md)
 
 ## Philosophy
 

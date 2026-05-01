@@ -3,6 +3,8 @@
 
 **Purpose:** Canonical router for the AI MemoryCore OS in this repository.
 
+`.sentinel-ai/boot-instruction.md` is the human/agent activation entry point. `master-memory.md` remains the canonical router after activation.
+
 ## Hierarchy
 
 | Layer | Role | Authority |
