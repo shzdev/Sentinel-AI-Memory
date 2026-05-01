@@ -10,11 +10,10 @@
 | Layer | Role | Authority |
 |-------|------|-----------|
 | `.sentinel-ai/` | Canonical memory, decision engine, governance, and memory policy | Source of truth |
-| `.agents/` | Specialists, skills, workflows, execution guidance | Execution layer only |
 | `tasks/lessons.md` | Task-pattern lessons and operational gotchas | Optional task-specific reference |
 | `COMPLETED_TASKS.md` | Long-form task log | Historical supplement |
 
-`.agents/` must not compete with MemoryCore OS. If an agent or workflow conflicts with `.sentinel-ai/`, follow `.sentinel-ai/` unless a higher-priority external system explicitly overrides it.
+Execution is handled directly by the AI following Sentinel AI MemoryCore OS rules. If any external instruction conflicts with `.sentinel-ai/`, follow `.sentinel-ai/` unless a higher-priority external system explicitly overrides it.
 
 ## When to load this file
 
@@ -41,9 +40,6 @@
 
 - [`main/relationship-memory.md`](main/relationship-memory.md)
 - [`main/project-history.md`](main/project-history.md)
-- [`.agents/ARCHITECTURE.md`](../.agents/ARCHITECTURE.md)
-- [`.agents/agents/`](../.agents/agents/)
-- [`.agents/skills/`](../.agents/skills/)
 - [`tasks/lessons.md`](../tasks/lessons.md)
 
 ### Light Mode
@@ -88,7 +84,7 @@ Older instructions may cite `.sentinel-ai/active-context.md`, `.sentinel-ai/iden
 |--------|----------------|
 | Task lessons | `tasks/lessons.md` |
 | Task log | `COMPLETED_TASKS.md` |
-| Specialist / workflow catalog | `.agents/ARCHITECTURE.md` |
+| Execution guidance | AI follows Sentinel AI MemoryCore OS rules directly |
 
 ## Maintenance protocol
 

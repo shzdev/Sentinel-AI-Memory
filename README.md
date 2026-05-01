@@ -182,73 +182,6 @@ Validation
 └── docs/                                       # Human-facing documentation
     └── getting-started.md                      # Quick onboarding guide
 
-.agents/                                        # Execution layer only; not canonical memory
-├── ARCHITECTURE.md                             # Agent catalog and execution-layer map
-├── mcp_config.json                             # Local tooling configuration
-├── agents/                                     # Specialist agent definitions
-│   ├── backend-specialist.md                   # Backend-focused agent
-│   ├── code-archaeologist.md                   # Legacy code / history investigator
-│   ├── database-architect.md                   # Schema and persistence specialist
-│   ├── debugger.md                             # Failure analysis and debugging agent
-│   ├── devops-engineer.md                      # Deployment and operations agent
-│   ├── documentation-writer.md                # Documentation-focused agent
-│   ├── explorer-agent.md                       # Fast codebase exploration agent
-│   ├── frontend-specialist.md                 # UI and frontend specialist
-│   ├── game-developer.md                      # Game-focused specialist
-│   ├── mobile-developer.md                    # Mobile-focused specialist
-│   ├── orchestrator.md                         # Multi-agent coordination
-│   ├── performance-optimizer.md               # Performance-focused agent
-│   ├── penetration-tester.md                  # Security testing agent
-│   ├── product-manager.md                     # Product framing and prioritization
-│   ├── product-owner.md                       # Requirements and scope agent
-│   ├── project-planner.md                     # Planning and task decomposition
-│   ├── qa-automation-engineer.md              # QA automation specialist
-│   ├── security-auditor.md                    # Security review specialist
-│   ├── seo-specialist.md                      # SEO-focused specialist
-│   └── test-engineer.md                       # Test design and verification agent
-├── workflows/                                  # Reusable execution workflows
-│   ├── brainstorm.md                           # Discovery and problem framing flow
-│   ├── create.md                               # Creation workflow
-│   ├── debug.md                                # Debugging workflow
-│   ├── deploy.md                               # Deployment workflow
-│   ├── enhance.md                              # Improvement / refinement workflow
-│   ├── orchestrate.md                          # Coordination workflow
-│   ├── plan.md                                 # Planning workflow
-│   ├── preview.md                              # Preview and review workflow
-│   ├── status.md                               # Status reporting workflow
-│   ├── test.md                                 # Test and validation workflow
-│   └── ui-ux-pro-max.md                        # UI/UX-oriented workflow
-├── scripts/                                    # Utility scripts for checks and previews
-│   ├── auto_preview.py                          # Preview automation helper
-│   ├── checklist.py                             # Checklist helper
-│   ├── session_manager.py                       # Session state helper
-│   └── verify_all.py                            # Validation runner
-└── skills/                                     # Reusable skill packs and references
-    ├── app-builder/                             # Application scaffolding and coordination
-    ├── api-patterns/                             # API architecture and design
-    ├── architecture/                             # Architecture tradeoff and pattern guidance
-    ├── behavioral-modes/                         # Operational mode guidance
-    ├── clean-code/                               # Code clarity and maintainability
-    ├── database-design/                          # Database architecture and optimization
-    ├── design-md/                                # DESIGN.md generation and synthesis
-    ├── documentation-templates/                  # Documentation structure templates
-    ├── enhance-prompt/                           # Prompt improvement utilities
-    ├── frontend-design/                          # Visual and UX decision guidance
-    ├── game-development/                         # Game-specific design skills
-    ├── i18n-localization/                         # Localization and translation structure
-    ├── lint-and-validate/                        # Validation helpers
-    ├── nextjs-react-expert/                      # React/Next.js performance guidance
-    ├── performance-profiling/                    # Performance measurement and profiling
-    ├── plan-writing/                             # Planning structure guidance
-    ├── powershell-windows/                      # PowerShell usage guidance
-    ├── python-patterns/                          # Python architecture guidance
-    ├── react-components/                         # Component generation and validation
-    ├── systematic-debugging/                     # Root cause analysis workflow
-    ├── tailwind-patterns/                        # Tailwind CSS architecture guidance
-    ├── testing-patterns/                         # Testing strategy guidance
-    ├── vulnerability-scanner/                    # Security scanning and review
-    └── ...
-
 tasks/                                           # Task notes and lightweight operational memory
 ├── lessons.md                                   # Durable lessons and gotchas
 └── todo.md                                      # Lightweight task list
@@ -263,7 +196,7 @@ docs/                                            # Human-facing documentation
 - `decision-engine/` - Mode detection, confidence scoring, hard-stop rules, and self-evaluation.
 - `governance/` - Engineering rules for scope, diffs, and verification.
 - `memory-policy/` - Rules for what should and should not be written into memory.
-- `.agents/` - Execution layer only; specialists, workflows, and supporting logic.
+- Execution is handled directly by the AI following Sentinel AI MemoryCore OS rules.
 - `tasks/` - Lightweight operational notes and lessons.
 - `docs/` - Onboarding and usage documentation.
 
@@ -326,7 +259,7 @@ See full activation guide: [docs/activation.md](docs/activation.md)
 
 ## Credits
 
-Sentinel AI MemoryCore OS is inspired by the MemoryCore concept for structured AI memory and workflow design.
+Sentinel AI MemoryCore OS is inspired by the MemoryCore concept by for structured AI memory and workflow design.
 
 This repository extends that idea into a practical operating model for disciplined AI development.
 

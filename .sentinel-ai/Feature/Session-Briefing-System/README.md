@@ -20,7 +20,6 @@
 - [`main/relationship-memory.md`](../../main/relationship-memory.md)
 - [`main/project-history.md`](../../main/project-history.md)
 - [`tasks/lessons.md`](../../../tasks/lessons.md)
-- [`.agents/ARCHITECTURE.md`](../../../.agents/ARCHITECTURE.md)
 
 ## Light Mode
 

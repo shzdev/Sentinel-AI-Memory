@@ -46,7 +46,6 @@ Memory behavior:
 - Only write memory if Write Score ≥ 4.
 - Do not log trivial edits, formatting changes, or temporary reasoning.
 - `.sentinel-ai/main/*` is the memory source of truth.
-- `.agents/` is execution layer only.
 
 Before final response in Architect Mode, include:
 

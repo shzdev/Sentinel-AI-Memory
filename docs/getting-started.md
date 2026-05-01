@@ -6,7 +6,6 @@ Copy the following into your project root:
 
 ```text
 .sentinel-ai/
-.agents/
 tasks/
 ```
 

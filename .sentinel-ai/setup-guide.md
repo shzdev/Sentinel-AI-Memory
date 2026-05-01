@@ -11,7 +11,7 @@ This `.sentinel-ai/` tree is the canonical MemoryCore OS for this repository:
 - `governance/` for engineering rules
 - `memory-policy/` for write discipline
 
-`.agents/` is the execution layer only. It contains specialists, skills, and workflows, but it is not the source of truth.
+Execution is handled directly by the AI following Sentinel AI MemoryCore OS rules.
 
 ## 5-minute onboarding
 
@@ -27,4 +27,3 @@ This `.sentinel-ai/` tree is the canonical MemoryCore OS for this repository:
 ## For instruction layers
 
 - Point canonical memory loading at `master-memory.md`.
-- Use `.agents/` only after the system router has determined mode, confidence, and scope.

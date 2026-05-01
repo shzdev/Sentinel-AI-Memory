@@ -67,7 +67,7 @@ Activation tells the AI to:
 
 Sentinel AI works best with three layers:
 
-- Repository structure: `.sentinel-ai/`, `.agents/`, `tasks/`
+- Repository structure: `.sentinel-ai/`, `tasks/`, `docs/`
 - Boot command: `Activate Sentinel AI`
 - AI coding instruction: [`docs/ai-coding-instruction.md`](ai-coding-instruction.md)
 

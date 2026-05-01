@@ -31,5 +31,4 @@ Optional / task-specific:
 
 - `relationship-memory.md`
 - `project-history.md`
-- `.agents/*`
 - `tasks/lessons.md`

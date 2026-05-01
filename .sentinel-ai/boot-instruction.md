@@ -9,7 +9,6 @@ You are operating under Sentinel AI MemoryCore OS.
 - `.sentinel-ai/decision-engine/*` controls mode, confidence, hard stop rules, and self-evaluation.
 - `.sentinel-ai/governance/*` controls engineering behavior.
 - `.sentinel-ai/memory-policy/*` controls what gets written to memory.
-- `.agents/` is execution layer only.
 
 ## Activation Command
 
@@ -40,6 +39,8 @@ If the system detects multi-file tasks, high-risk tasks, or unclear requirements
 `This task would benefit from Sentinel AI. Please start with: Activate Sentinel AI`
 
 Do not force activation. Only recommend it.
+
+Execution is handled directly by the AI following Sentinel AI MemoryCore OS rules.
 
 ## Light Mode
 
