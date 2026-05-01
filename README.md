@@ -259,7 +259,7 @@ See full activation guide: [docs/activation.md](docs/activation.md)
 
 ## Credits
 
-Sentinel AI MemoryCore OS is inspired by the MemoryCore concept by for structured AI memory and workflow design.
+Sentinel AI MemoryCore OS is inspired by the MemoryCore concept by Kiyoraka for structured AI memory and workflow design.
 
 This repository extends that idea into a practical operating model for disciplined AI development.
 
