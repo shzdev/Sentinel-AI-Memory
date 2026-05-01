@@ -170,3 +170,6 @@ Extended into a full system architecture
 ## 🚀 Getting Started
 
 See `docs/getting-started.md`
+=======
+# Sentinel-AI-Memory
+AI development operating system built on MemoryCore — adds decision engine, risk control, and disciplined execution for reliable AI coding workflows.
