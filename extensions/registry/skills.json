@@ -1,0 +1,50 @@
+[
+  {
+    "name": "example-sentinel-skill",
+    "type": "skill",
+    "version": "0.1.0",
+    "status": "active",
+    "path": "extensions/skills/sentinel-native/skill-template/SKILL.md",
+    "description": "Template for Sentinel-native skills imported or adapted for Sentinel AI.",
+    "riskLevel": "medium",
+    "inputsRequired": [],
+    "sentinelCompatible": true,
+    "source": "sentinel-native"
+  },
+  {
+    "name": "readme-improver",
+    "type": "skill",
+    "version": "1.0.0",
+    "status": "active",
+    "path": "extensions/skills/sentinel-native/README-improver/SKILL.md",
+    "description": "Improves repository documentation without changing core behavior.",
+    "riskLevel": "low",
+    "inputsRequired": ["target README", "scope", "audience"],
+    "sentinelCompatible": true,
+    "source": "sentinel-native"
+  },
+  {
+    "name": "architecture-auditor",
+    "type": "skill",
+    "version": "1.0.0",
+    "status": "active",
+    "path": "extensions/skills/sentinel-native/architecture-auditor/SKILL.md",
+    "description": "Checks extension and repo structure against Sentinel governance.",
+    "riskLevel": "medium",
+    "inputsRequired": ["target scope", "design goal", "constraints"],
+    "sentinelCompatible": true,
+    "source": "sentinel-native"
+  },
+  {
+    "name": "memory-cleaner",
+    "type": "skill",
+    "version": "1.0.0",
+    "status": "active",
+    "path": "extensions/skills/sentinel-native/memory-cleaner/SKILL.md",
+    "description": "Helps reduce memory noise by keeping only high-value durable context.",
+    "riskLevel": "medium",
+    "inputsRequired": ["memory entries", "retention goal", "policy constraints"],
+    "sentinelCompatible": true,
+    "source": "sentinel-native"
+  }
+]

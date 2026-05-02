@@ -1,0 +1,11 @@
+{
+  "name": "sentinel-ai-cli",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "smoke": "node scripts/smoke-test.js"
+  },
+  "bin": {
+    "sentinel": "./bin/sentinel.js"
+  }
+}

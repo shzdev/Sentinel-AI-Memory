@@ -1,268 +1,118 @@
-# Sentinel AI MemoryCore OS
+# Sentinel AI MemoryCore OS v1.0.0
 
 Structured AI development operating system for disciplined, risk-aware execution.
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Status](https://img.shields.io/badge/status-active-success)
+![Status](https://img.shields.io/badge/status-stable-success)
 ![AI System](https://img.shields.io/badge/type-AI%20Operating%20System-purple)
 ![Architecture](https://img.shields.io/badge/architecture-MemoryCore%20OS-orange)
 
 ## Quick Start
 
-### AI Coding Agent Instruction
+1. Read [docs/canonical-instruction.md](docs/canonical-instruction.md) or [docs/ai-coding-instruction.md](docs/ai-coding-instruction.md).
+2. Clone the repository.
+3. Start the session with `Activate Sentinel AI`.
 
-For best results, add the Sentinel AI instruction to your AI coding tool.
-
-- [docs/ai-coding-instruction.md](docs/ai-coding-instruction.md)
-
-Best setup:
-
-- Repo files + AI coding instruction + `Activate Sentinel AI` command
-
-### Option 1 - Manual Clone
+Example:
 
 ```bash
 git clone https://github.com/shzdev/Sentinel-AI-Memory.git
 cd Sentinel-AI-Memory
 ```
 
-Then start your AI session with:
-
 ```text
 Activate Sentinel AI
 ```
 
-You can combine activation and task in a single message.
+You can combine activation and task in one message.
 
-### Option 2 - Let AI Coding Agent Clone It
+## Activation
 
-```text
-Clone and set up this repository:
-https://github.com/shzdev/Sentinel-AI-Memory.git
+Activation tells the AI to load the Sentinel core before making changes.
 
-After cloning, activate Sentinel AI by reading:
-.sentinel-ai/boot-instruction.md
+- read `.sentinel-ai/boot-instruction.md`
+- read `.sentinel-ai/master-memory.md`
+- follow mode detection, hard stops, and governance
+- respect the memory write filter
 
-Then link:
-See full activation guide: [docs/activation.md](docs/activation.md)
+See [docs/activation.md](docs/activation.md) for the activation flow.
+
+## CLI Usage
+
+The local-only Sentinel CLI lives in [tools/sentinel-cli/README.md](tools/sentinel-cli/README.md).
+
+Common commands:
+
+```bash
+sentinel list skills
+sentinel install skill readme-improver --dry-run
+sentinel install skill readme-improver
+sentinel import skill ./my-skill --dry-run
+sentinel resolve "Improve README onboarding"
+sentinel resolve "Improve README onboarding" --explain
 ```
 
-## The Problem
+## Extensions
 
-Most AI coding setups are optimized for speed, not reliability.
+Sentinel AI v1.0 adds an optional extension ecosystem around the core operating system.
 
-They tend to:
+- `.sentinel-ai/` remains the core operating system
+- `extensions/` contains optional agents, workflows, templates, and skills
+- external/OpenAI-style skills are accepted as input only and normalized into Sentinel-native format
+- Sentinel-native is the only stored and runtime skill format
+- the core stays unchanged and keeps final authority
 
-- answer too quickly
-- assume missing details
-- blur scope
-- skip validation
-- accumulate noisy context
+See:
 
-That creates fragile workflows and hard-to-trust output.
+- [docs/extensions.md](docs/extensions.md)
+- [docs/openai-skills-compatibility.md](docs/openai-skills-compatibility.md)
+- [docs/v2-architecture.md](docs/v2-architecture.md)
 
-## The Shift
+## Release Readiness
 
-Sentinel AI changes the model from a passive responder into a structured engineering system.
+- local CLI smoke test is available
+- release checklist is documented
+- current CLI is v1.0.0 local-only
+- CHANGELOG and release notes are included
 
-It adds:
+See:
 
-- decision making before execution
-- risk awareness before action
-- governance before changes
-- validation before completion
-
-The result is AI behavior with discipline, not just volume.
-
-## Real Talk
-
-Original:
-
-> "AI remembers"
-
-Sentinel AI:
-
-> "AI evaluates, decides, and acts with discipline"
-
-## What is this
-
-Sentinel AI MemoryCore OS is a reusable AI operating system built around structured memory and execution control.
-
-It is designed to help AI:
-
-- load the right context
-- choose the right mode
-- follow explicit rules
-- write back only meaningful memory
-- verify its own output
-
-## Core Capabilities
-
-- Persistent, structured memory
-- Router-based session loading
-- Light Mode and Architect Mode
-- Confidence scoring for task clarity
-- Hard-stop rules for missing or risky inputs
-- Governance rules for scoped, surgical changes
-- Memory policy to prevent context noise
-- Execution layer for specialized workflows
-
-## Architecture Flow
-
-```text
-User Request
-    ↓
-Memory Router
-    ↓
-Decision Engine
-    ↓
-Governance
-    ↓
-Execution Layer
-    ↓
-Validation
-```
+- [docs/release-checklist.md](docs/release-checklist.md)
+- [CHANGELOG.md](CHANGELOG.md)
+- [docs/release-notes-v1.0.md](docs/release-notes-v1.0.md)
 
 ## File Structure
 
 ```text
-.sentinel-ai/                                   # Canonical AI control plane and memory system
-├── master-memory.md                            # Canonical router & load order
-├── active-context.md                           # Backward-compatible alias to current session memory
-├── identity-core.md                            # Backward-compatible alias to identity memory
-├── project-history.md                          # Backward-compatible alias to history memory
-├── relationship-memory.md                      # Backward-compatible alias to relationship memory
-├── setup-guide.md                              # Human-facing onboarding guide
-├── setup-wizard.md                             # Quick-start checklist
-├── main/                                       # Canonical durable memory shards
-│   ├── current-session.md                      # Active working memory (RAM-like)
-│   ├── identity-core.md                        # System identity, role, and operating posture
-│   ├── architectural-directives.md             # Durable technical constraints and rules
-│   ├── relationship-memory.md                  # Schema, entity, and access relationship notes
-│   ├── project-history.md                      # Milestones and long-lived progress log
-│   └── README.md                               # Index for the canonical memory shards
-├── decision-engine/                            # Mode selection and risk control
-│   ├── mode-detection.md                       # Light Mode vs Architect Mode rules
-│   ├── confidence-score.md                     # Task confidence scoring model
-│   ├── hard-stop-rules.md                      # Stop conditions for missing or risky inputs
-│   └── self-evaluation.md                      # Required final self-check format
-├── governance/                                 # Execution discipline and safety rules
-│   ├── engineering-rules.md                    # Core engineering principles
-│   ├── scope-control.md                        # Scope boundaries and change discipline
-│   ├── surgical-diff.md                        # Minimal-change editing rules
-│   └── verification-rules.md                   # Validation and verification requirements
-├── memory-policy/                              # Memory write discipline
-│   ├── memory-hygiene.md                       # What stays out of memory
-│   ├── promotion-rules.md                      # When transient context becomes durable
-│   └── write-filter.md                         # Write threshold and retention rules
-├── Feature/                                    # Optional feature maps and memory-system extensions
-│   ├── README.md                               # Feature index and extension map
-│   ├── Memory-Consolidation-System/             # Memory merge and normalization guidance
-│   │   └── README.md                           # Consolidation overview
-│   ├── Session-Briefing-System/                # Session start / briefing structure
-│   │   └── README.md                           # Briefing overview
-│   ├── Decision-Log-System/                    # Decision tracking and reasoning log
-│   │   └── README.md                           # Decision log overview
-│   ├── Post-Mortem-System/                     # Failure analysis and lessons
-│   │   └── README.md                           # Post-mortem overview
-│   ├── Echo-Memory-Recall/                     # Historical recall and search guidance
-│   │   └── README.md                           # Recall overview
-│   ├── LRU-Project-Management-System/          # Optional project-slot management
-│   │   └── README.md                           # LRU project map
-│   └── Reminders-System/                       # Reminder and follow-up guidance
-│       └── README.md                           # Reminders overview
-├── library-items/                              # Reusable reference snippets and notes
-│   └── README.md                               # Library index
-├── daily-diary/                                # Optional long-form session archive
-│   ├── README.md                               # Diary usage and archive guidance
-│   ├── daily-diary-protocol.md                 # Diary entry format and retention rules
-│   └── archive/                                # Archived diary entries
-├── projects/                                   # Optional multi-project tracking area
-│   └── README.md                               # Projects placeholder / index
-└── docs/                                       # Human-facing documentation
-    └── getting-started.md                      # Quick onboarding guide
-
-tasks/                                           # Task notes and lightweight operational memory
-├── lessons.md                                   # Durable lessons and gotchas
-└── todo.md                                      # Lightweight task list
-
-docs/                                            # Human-facing documentation
-└── getting-started.md                            # Quick onboarding guide
+.
+- .sentinel-ai/                Core operating system and memory
+- CHANGELOG.md                 Release history
+- LICENSE                      MIT license
+- README.md                    Repository overview
+- docs/                        Activation, instructions, architecture, release docs
+  - activation.md
+  - ai-coding-instruction.md
+  - canonical-instruction.md
+  - release-checklist.md
+  - release-notes-v1.0.md
+  - extensions.md
+  - openai-skills-compatibility.md
+  - v2-architecture.md
+- extensions/                  Optional registry-driven ecosystem
+- tasks/                       Task notes and supporting material
+- templates/                   Reusable project starter templates
+- tools/                       Local tooling, including sentinel-cli
+  - sentinel-cli/
+    - bin/
+    - fixtures/
+    - scripts/
 ```
-
-- `.sentinel-ai/` - Canonical AI control plane and memory system.
-- `master-memory.md` - Router that defines load order and system authority.
-- `main/` - Durable memory shards for session state, identity, history, and directives.
-- `decision-engine/` - Mode detection, confidence scoring, hard-stop rules, and self-evaluation.
-- `governance/` - Engineering rules for scope, diffs, and verification.
-- `memory-policy/` - Rules for what should and should not be written into memory.
-- Execution is handled directly by the AI following Sentinel AI MemoryCore OS rules.
-- `tasks/` - Lightweight operational notes and lessons.
-- `docs/` - Onboarding and usage documentation.
-
-## What Changes in Practice
-
-Sentinel AI does not treat every request the same way.
-
-Instead, it:
-
-1. reads the canonical memory
-2. evaluates task risk and scope
-3. selects Light Mode or Architect Mode
-4. applies governance rules
-5. executes within defined constraints
-6. validates the result
-7. self-evaluates before finishing
-
-That makes the system behave like a disciplined engineering assistant, not a loose prompt chain.
-
-## Example Scenario
-
-A developer asks for a feature that touches memory, rules, and execution behavior.
-
-Sentinel AI should:
-
-- load the relevant files
-- detect whether the request is simple or cross-cutting
-- escalate if risk is unclear
-- avoid guessing missing requirements
-- apply the smallest safe change
-- verify the result before responding
-
-The outcome is controlled execution with traceable reasoning.
-
-## Getting Started
-
-Short version:
-
-1. Read [Getting Started](docs/getting-started.md)
-2. Review `master-memory.md`
-3. Inspect the files under `main/`
-4. Use the system on a real task and follow the mode guidance
-
-See full activation guide: [docs/activation.md](docs/activation.md)
-
-## Philosophy
-
-- simple over clever
-- minimal over excessive
-- safe over risky
-- explicit constraints over silent assumptions
-- durable memory over noisy logs
-
-## Who is this for
-
-- developers using AI in real projects
-- teams that want consistent AI behavior
-- anyone who wants AI to reason before acting
-- builders who need structure, not improvisation
 
 ## Credits
 
-Sentinel AI MemoryCore OS is inspired by the MemoryCore concept by Kiyoraka for structured AI memory and workflow design.
-
-This repository extends that idea into a practical operating model for disciplined AI development.
+Sentinel AI MemoryCore OS is built around a core operating system plus optional extension tooling.
+The release structure in this repository keeps the core authoritative and the extension layer optional.
 
 ## License
 
-See the `LICENSE` file in this repository.
+MIT. See [LICENSE](LICENSE).

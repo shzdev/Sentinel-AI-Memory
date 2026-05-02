@@ -1,4 +1,4 @@
-# Getting Started — Sentinel AI MemoryCore OS
+# Getting Started - Sentinel AI MemoryCore OS
 
 ## 1. Copy Core System
 
@@ -37,7 +37,7 @@ Add:
 
 ### `.sentinel-ai/main/current-session.md`
 
-Start empty — this is your working memory
+Start empty - this is your working memory
 
 ---
 
@@ -110,7 +110,7 @@ AI will:
 ## 8. Example Workflow
 
 ```text
-Task → AI evaluates → AI decides mode → AI executes → AI validates
+Task -> AI evaluates -> AI decides mode -> AI executes -> AI validates
 ```
 
 ---
@@ -119,4 +119,4 @@ Task → AI evaluates → AI decides mode → AI executes → AI validates
 
 You now have:
 
-> A structured AI system — not just a coding assistant
+> A structured AI system - not just a coding assistant

@@ -1,0 +1,13 @@
+[
+  {
+    "name": "sentinel-extensions",
+    "type": "ecosystem",
+    "version": "v2",
+    "status": "active",
+    "path": "extensions/",
+    "description": "Optional extension layer for reusable Sentinel AI helpers and workflows.",
+    "riskLevel": "low",
+    "inputsRequired": [],
+    "sentinelCompatible": true
+  }
+]

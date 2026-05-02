@@ -1,0 +1,22 @@
+{
+  "readme": {
+    "keywords": ["README", "documentation", "onboarding"],
+    "recommendedExtensions": ["readme-improver"],
+    "riskLevel": "low"
+  },
+  "architecture-audit": {
+    "keywords": ["architecture", "audit", "load order", "memorycore"],
+    "recommendedExtensions": ["architecture-auditor"],
+    "riskLevel": "medium"
+  },
+  "memory-cleanup": {
+    "keywords": ["clean memory", "sanitize", "template"],
+    "recommendedExtensions": ["memory-cleaner"],
+    "riskLevel": "medium"
+  },
+  "security": {
+    "keywords": ["security", "vulnerability", "auth", "permission"],
+    "recommendedExtensions": ["security-reviewer"],
+    "riskLevel": "high"
+  }
+}

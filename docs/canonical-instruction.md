@@ -1,8 +1,6 @@
-# AI Coding Instruction
+# Canonical Sentinel AI Instruction
 
-Use this instruction in Cursor, Claude Code, Copilot, or any AI coding agent.
-
-Use [docs/canonical-instruction.md](canonical-instruction.md) as the canonical copy-paste instruction for this repository.
+Copy this into an AI coding tool when you want Sentinel AI behavior for this repository.
 
 ```text
 You are operating inside a repository that uses Sentinel AI MemoryCore OS.

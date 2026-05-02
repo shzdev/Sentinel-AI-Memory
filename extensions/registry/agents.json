@@ -1,0 +1,35 @@
+[
+  {
+    "name": "architect-reviewer",
+    "type": "agent",
+    "version": "1.0.0",
+    "status": "active",
+    "path": "extensions/agents/architect-reviewer.md",
+    "description": "Optional architecture review prompt for additive changes.",
+    "riskLevel": "medium",
+    "inputsRequired": ["change summary", "relevant files", "constraints"],
+    "sentinelCompatible": true
+  },
+  {
+    "name": "security-reviewer",
+    "type": "agent",
+    "version": "1.0.0",
+    "status": "active",
+    "path": "extensions/agents/security-reviewer.md",
+    "description": "Optional security review prompt for scoped changes.",
+    "riskLevel": "high",
+    "inputsRequired": ["change summary", "relevant files", "deployment context"],
+    "sentinelCompatible": true
+  },
+  {
+    "name": "test-reviewer",
+    "type": "agent",
+    "version": "1.0.0",
+    "status": "active",
+    "path": "extensions/agents/test-reviewer.md",
+    "description": "Optional test review prompt for validation coverage.",
+    "riskLevel": "medium",
+    "inputsRequired": ["change summary", "affected files", "validation method"],
+    "sentinelCompatible": true
+  }
+]
