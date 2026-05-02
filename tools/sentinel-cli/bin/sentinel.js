@@ -2,12 +2,25 @@
 
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline');
 
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 const SKILLS_REGISTRY = path.join(ROOT, 'extensions', 'registry', 'skills.json');
 const AGENTS_REGISTRY = path.join(ROOT, 'extensions', 'registry', 'agents.json');
 const TASK_MAP = path.join(ROOT, 'extensions', 'resolver', 'task-classification-map.json');
+const SENTINEL_IDENTITY_FILE = path.join(ROOT, '.sentinel-ai', 'main', 'sentinel-identity.json');
 const VALID_RISK_LEVELS = new Set(['low', 'medium', 'high']);
+const RESERVED_ACTIVATION_NAMES = new Set([
+  'sentinel',
+  'setup-name',
+  'identity',
+  'install',
+  'import',
+  'resolve',
+  'list',
+  'help'
+]);
+const ACTIVATION_GREETINGS = ['hey', 'hi', 'hello', 'yo', 'ask'];
 const STANDARD_SECTIONS = [
   'Purpose',
   'When to Use',
@@ -55,8 +68,194 @@ function readJson(file) {
   }
 }
 
+function writeJson(file, value) {
+  fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
+}
+
 function normalize(value) {
   return String(value || '').trim().toLowerCase();
+}
+
+function normalizeActivationDisplayName(value) {
+  return String(value || '')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+function normalizeActivationName(value) {
+  return normalizeActivationDisplayName(value).toLowerCase();
+}
+
+function getSentinelIdentityPath() {
+  return process.env.SENTINEL_IDENTITY_FILE
+    ? path.resolve(process.env.SENTINEL_IDENTITY_FILE)
+    : SENTINEL_IDENTITY_FILE;
+}
+
+function readSentinelIdentity() {
+  const file = getSentinelIdentityPath();
+  if (!fs.existsSync(file)) {
+    return null;
+  }
+
+  const data = readJson(file);
+  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    throw new Error(`Invalid Sentinel identity config in ${path.relative(ROOT, file)}: expected an object`);
+  }
+
+  const identity = data.sentinel_identity;
+  if (!identity || typeof identity !== 'object' || Array.isArray(identity)) {
+    throw new Error(`Invalid Sentinel identity config in ${path.relative(ROOT, file)}: missing sentinel_identity`);
+  }
+
+  return identity;
+}
+
+function validateActivationName(value) {
+  const displayName = normalizeActivationDisplayName(value);
+  if (!displayName) {
+    throw new Error('Activation name must not be empty.');
+  }
+  if (displayName.length > 32) {
+    throw new Error('Activation name must be 32 characters or fewer.');
+  }
+  if (!/^[A-Za-z0-9 _-]+$/.test(displayName)) {
+    throw new Error('Activation name may only contain letters, numbers, spaces, hyphen, and underscore.');
+  }
+
+  const normalizedName = normalizeActivationName(displayName);
+  if (!normalizedName) {
+    throw new Error('Activation name must not be empty.');
+  }
+  if (RESERVED_ACTIVATION_NAMES.has(normalizedName)) {
+    throw new Error(`Activation name "${displayName}" conflicts with a reserved system command.`);
+  }
+  if (normalizedName === 'sentinel') {
+    throw new Error('Activation name "sentinel" is reserved. Choose a more specific name.');
+  }
+
+  return {
+    displayName,
+    normalizedName
+  };
+}
+
+function saveSentinelIdentity(value) {
+  checkRepoRoot();
+  const { displayName, normalizedName } = validateActivationName(value);
+  const file = getSentinelIdentityPath();
+  const existing = fs.existsSync(file) ? readSentinelIdentity() : null;
+  const now = new Date().toISOString();
+
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  writeJson(file, {
+    sentinel_identity: {
+      activation_name: displayName,
+      normalized_activation_name: normalizedName,
+      created_at: existing && existing.created_at ? existing.created_at : now,
+      updated_at: now
+    }
+  });
+
+  return readSentinelIdentity();
+}
+
+function normalizeInputForActivation(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function escapeRegex(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function activationNamePattern(normalizedName) {
+  return escapeRegex(normalizedName).replace(/ /g, '\\s+');
+}
+
+function extractActivationMatch(text, regex, trigger) {
+  const match = String(text || '').match(regex);
+  if (!match) {
+    return null;
+  }
+
+  return {
+    activated: true,
+    trigger,
+    matchedText: match[0].trim(),
+    remainingText: String(match[1] || '').trim()
+  };
+}
+
+function detectActivationInput(inputText, identity) {
+  const normalizedInput = normalizeInputForActivation(inputText);
+  if (!normalizedInput) {
+    return {
+      activated: false,
+      trigger: null,
+      matchedText: '',
+      remainingText: ''
+    };
+  }
+
+  const canonical = extractActivationMatch(
+    normalizedInput,
+    /^activate\s+sentinel\s+ai(?:\s+(.*))?$/,
+    'canonical'
+  );
+  if (canonical) {
+    return canonical;
+  }
+
+  if (!identity || !identity.normalized_activation_name) {
+    return {
+      activated: false,
+      trigger: null,
+      matchedText: '',
+      remainingText: ''
+    };
+  }
+
+  const name = activationNamePattern(identity.normalized_activation_name);
+  const patterns = [
+    { regex: new RegExp(`^${name}$`), trigger: 'custom-name' },
+    { regex: new RegExp(`^(?:${ACTIVATION_GREETINGS.join('|')})\\s+${name}(?:\\s+(.*))?$`), trigger: 'custom-greeting' },
+    { regex: new RegExp(`^${name}\\s+activate(?:\\s+(.*))?$`), trigger: 'custom-name-activate' },
+    { regex: new RegExp(`^activate\\s+${name}(?:\\s+(.*))?$`), trigger: 'custom-activate-name' }
+  ];
+
+  for (const pattern of patterns) {
+    const result = extractActivationMatch(normalizedInput, pattern.regex, pattern.trigger);
+    if (result) {
+      return result;
+    }
+  }
+
+  return {
+    activated: false,
+    trigger: null,
+    matchedText: '',
+    remainingText: ''
+  };
+}
+
+async function promptForActivationName() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  try {
+    const answer = await new Promise((resolve) => {
+      rl.question('What name should activate Sentinel AI? ', resolve);
+    });
+    return answer;
+  } finally {
+    rl.close();
+  }
 }
 
 function parseFrontMatter(contents) {
@@ -1114,6 +1313,17 @@ function resolveTask(args) {
   }
 }
 
+async function setupActivationName() {
+  showSafetyReminder();
+  const answer = await promptForActivationName();
+  const identity = saveSentinelIdentity(answer);
+  output(`Sentinel activation name saved: ${identity.activation_name}`);
+  output(
+    `You can now activate Sentinel AI by saying: "hey ${identity.normalized_activation_name}" or "${identity.normalized_activation_name} activate"`
+  );
+  output('The original phrase "Activate Sentinel AI" still works.');
+}
+
 function usage() {
   showSafetyReminder();
   output('Usage:');
@@ -1121,9 +1331,11 @@ function usage() {
   output('  sentinel install skill <name> [--dry-run] [--force] [--source registry|local] [--type sentinel-native|openai-compatible]');
   output('  sentinel import skill <local-path> [--dry-run] [--force] [--type sentinel-native|openai-compatible] [--name custom-name]');
   output('  sentinel resolve "<task>" [--explain]');
+  output('  sentinel setup-name');
+  output('  sentinel identity setup');
 }
 
-function main() {
+async function main() {
   try {
     const argv = process.argv.slice(2);
     const command = argv[0];
@@ -1154,10 +1366,35 @@ function main() {
       return;
     }
 
+    if (command === 'setup-name') {
+      await setupActivationName();
+      return;
+    }
+
+    if (command === 'identity' && subcommand === 'setup') {
+      await setupActivationName();
+      return;
+    }
+
     throw new Error(`Unknown command: ${argv.join(' ') || '(empty)'}`);
   } catch (err) {
     fail(err.message);
   }
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  ACTIVATION_GREETINGS,
+  RESERVED_ACTIVATION_NAMES,
+  detectActivationInput,
+  getSentinelIdentityPath,
+  normalizeActivationDisplayName,
+  normalizeActivationName,
+  normalizeInputForActivation,
+  readSentinelIdentity,
+  saveSentinelIdentity,
+  validateActivationName
+};

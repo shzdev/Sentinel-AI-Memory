@@ -37,6 +37,14 @@ Activation tells the AI to load the Sentinel core before making changes.
 
 See [docs/activation.md](docs/activation.md) for the activation flow.
 
+Custom activation names are also supported through the local CLI:
+
+```bash
+sentinel setup-name
+```
+
+After setup, phrases like `hey nova` or `nova activate` trigger the same activation flow as `Activate Sentinel AI`.
+
 ## CLI Usage
 
 The local-only Sentinel CLI lives in [tools/sentinel-cli/README.md](tools/sentinel-cli/README.md).
@@ -51,6 +59,127 @@ sentinel import skill ./my-skill --dry-run
 sentinel resolve "Improve README onboarding"
 sentinel resolve "Improve README onboarding" --explain
 ```
+
+## Custom Activation Name
+
+Sentinel AI can also use a custom activation name in addition to the canonical:
+
+```text
+Activate Sentinel AI
+```
+
+Set it locally with:
+
+```bash
+sentinel setup-name
+```
+
+The CLI will ask:
+
+```text
+What name should activate Sentinel AI?
+```
+
+Example:
+
+```text
+Nova
+```
+
+After setup, phrases like these will trigger the same Sentinel activation flow:
+
+```text
+hey nova
+hi nova
+nova
+nova activate
+activate nova
+ask nova
+```
+
+This only changes input recognition.
+It does not bypass boot instruction, master router, decision engine, governance, or memory policy.
+The original `Activate Sentinel AI` phrase still works.
+
+### How To Test It
+
+1. Move into the CLI folder:
+
+```bash
+cd tools/sentinel-cli
+```
+
+2. Run the full smoke test:
+
+```bash
+npm run smoke
+```
+
+This verifies:
+
+- skill listing still works
+- install dry-run still works
+- import dry-run still works
+- resolver still works
+- custom activation name tests pass
+
+3. Test the setup flow manually:
+
+```bash
+node bin/sentinel.js setup-name
+```
+
+4. When prompted, enter a name such as:
+
+```text
+Nova
+```
+
+Expected output:
+
+```text
+Sentinel activation name saved: Nova
+You can now activate Sentinel AI by saying: "hey nova" or "nova activate"
+The original phrase "Activate Sentinel AI" still works.
+```
+
+5. Confirm the saved local config exists:
+
+- `.sentinel-ai/main/sentinel-identity.json`
+
+Expected structure:
+
+```json
+{
+  "sentinel_identity": {
+    "activation_name": "Nova",
+    "normalized_activation_name": "nova",
+    "created_at": "...",
+    "updated_at": "..."
+  }
+}
+```
+
+6. Test updating the name:
+
+```bash
+node bin/sentinel.js identity setup
+```
+
+7. For focused activation-name tests only:
+
+```bash
+node scripts/activation-name-test.js
+```
+
+The test coverage includes:
+
+- exact name detection
+- greeting phrase detection
+- case-insensitive detection
+- substring false-positive protection
+- invalid-name rejection
+- preserving `Activate Sentinel AI`
 
 ## Extensions
 

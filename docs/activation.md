@@ -22,6 +22,31 @@ Activate Sentinel AI
 
 That command tells the AI to read `.sentinel-ai/boot-instruction.md` and begin from the canonical router.
 
+## Custom Activation Name
+
+Users can configure a custom activation name for Sentinel AI.
+
+```bash
+sentinel setup-name
+```
+
+After setup:
+
+```text
+hey nova
+nova activate
+```
+
+will trigger the same Sentinel activation flow as:
+
+```text
+Activate Sentinel AI
+```
+
+The custom name only affects input recognition.
+It does not bypass boot instruction, master router, decision engine, governance, or memory policy.
+The original `Activate Sentinel AI` phrase still remains valid.
+
 ### Combining Activation and Task
 
 You can activate Sentinel AI and give the task in one message.

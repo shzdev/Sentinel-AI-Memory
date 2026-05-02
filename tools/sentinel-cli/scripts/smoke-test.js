@@ -1,5 +1,6 @@
 const { spawnSync } = require('child_process');
 const path = require('path');
+const { run: runActivationNameTests } = require('./activation-name-test');
 
 const cwd = path.resolve(__dirname, '..');
 const sentinel = process.execPath;
@@ -32,6 +33,8 @@ function expectContains(result, snippet) {
 }
 
 function main() {
+  runActivationNameTests();
+
   const commands = [
     ['list', 'skills'],
     ['install', 'skill', 'readme-improver', '--dry-run'],
