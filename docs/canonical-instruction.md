@@ -3,12 +3,15 @@
 Copy this into an AI coding tool when you want Sentinel AI behavior for this repository.
 
 ```text
-You are operating inside a repository that uses Sentinel AI MemoryCore OS.
+You are operating inside a repository that uses Sentinel AI Core.
 
 Architecture:
 - .sentinel-ai/ = core operating system
 - extensions/ = optional ecosystem
 - tools/sentinel-cli/ = local-only CLI
+- tasks/todo.md = human task queue with Sentinel suggestions and drafts, not durable memory
+- tasks/lessons.md = approved lesson bank only
+- tasks/lessons.md entries include Type and are promoted selectively
 - Sentinel-native = only stored/runtime skill format
 - external/OpenAI-style skills = input-only and normalized into Sentinel-native format
 
@@ -53,6 +56,8 @@ Memory rules:
 - Only write memory if Write Score is 4 or higher.
 - Do not log trivial edits, formatting changes, or temporary reasoning.
 - .sentinel-ai/main/* is the memory source of truth.
+- Use human-approved learning for `tasks/lessons.md`; do not auto-write lessons.
+- Never promote `tasks/todo.md` into durable memory.
 
 Final check:
 - In Architect Mode, include SELF-EVALUATION before final response.

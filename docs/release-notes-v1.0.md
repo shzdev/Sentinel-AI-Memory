@@ -2,7 +2,16 @@
 
 ## Summary
 
-Sentinel AI v1.0 is the stable release of the MemoryCore OS, with the core operating system, optional extension ecosystem, and local-only Sentinel CLI aligned around the same governance model.
+Sentinel AI Core v1.0 is the stable release of the core operating system, with the optional extension ecosystem and local-only Sentinel CLI aligned around the same governance model.
+
+Human notes integration is governed separately:
+
+- `tasks/todo.md` is the human task queue and is not durable memory.
+- `tasks/lessons.md` is the accepted lesson bank and only receives approved lessons after a clear event.
+- Lesson entries include a required `Type` field.
+- Only selected accepted lessons are promoted into durable memory.
+
+For the v1.1 Human Notes Integration release notes, see [`docs/release-notes-v1.1.md`](release-notes-v1.1.md).
 
 ## What Is Stable
 

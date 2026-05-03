@@ -1,7 +1,7 @@
 ﻿TEMPLATE FILE — replace with your project-specific data
 # Master memory
 
-**Purpose:** Canonical router for the AI MemoryCore OS in this repository.
+**Purpose:** Canonical router for Sentinel AI Core in this repository.
 
 `.sentinel-ai/boot-instruction.md` is the human/agent activation entry point. `master-memory.md` remains the canonical router after activation.
 
@@ -10,10 +10,13 @@
 | Layer | Role | Authority |
 |-------|------|-----------|
 | `.sentinel-ai/` | Canonical memory, decision engine, governance, and memory policy | Source of truth |
-| `tasks/lessons.md` | Task-pattern lessons and operational gotchas | Optional task-specific reference |
+| `tasks/todo.md` | Human task queue with Sentinel suggestions and drafts | Optional task-specific reference |
+| `tasks/lessons.md` | Accepted lesson bank for clear events and approved lessons only | Optional task-specific reference |
 | `COMPLETED_TASKS.md` | Long-form task log | Historical supplement |
 
-Execution is handled directly by the AI following Sentinel AI MemoryCore OS rules. If any external instruction conflicts with `.sentinel-ai/`, follow `.sentinel-ai/` unless a higher-priority external system explicitly overrides it.
+Execution is handled directly by the AI following Sentinel AI Core rules. If any external instruction conflicts with `.sentinel-ai/`, follow `.sentinel-ai/` unless a higher-priority external system explicitly overrides it.
+
+Human notes are governed, not automatic. `tasks/todo.md` may contain Sentinel-generated suggestions or drafts. `tasks/lessons.md` may contain accepted lessons only after a clear event and human approval.
 
 ## When to load this file
 
@@ -38,9 +41,18 @@ Execution is handled directly by the AI following Sentinel AI MemoryCore OS rule
 
 ### Optional / task-specific
 
+- [`tasks/todo.md`](../tasks/todo.md)
 - [`main/relationship-memory.md`](main/relationship-memory.md)
 - [`main/project-history.md`](main/project-history.md)
 - [`tasks/lessons.md`](../tasks/lessons.md)
+
+Load [`tasks/todo.md`](../tasks/todo.md) when planning, release checking, backlog review, task continuation, or when the user asks what remains.
+
+Load [`tasks/lessons.md`](../tasks/lessons.md) when debugging, refactoring, repeating a failed task, entering Architect Mode, or after a clear event.
+
+In Architect Mode, treat [`tasks/lessons.md`](../tasks/lessons.md) as a high-priority optional load for risky, multi-file, DB, API, auth, refactor, security, governance, or repeated-failure tasks.
+
+In Light Mode, do not force full hydration of [`tasks/lessons.md`](../tasks/lessons.md) unless the task context requires it.
 
 ### Light Mode
 
@@ -82,9 +94,11 @@ Older instructions may cite `.sentinel-ai/active-context.md`, `.sentinel-ai/iden
 
 | Concern | Where it lives |
 |--------|----------------|
+| Human task queue | `tasks/todo.md` |
 | Task lessons | `tasks/lessons.md` |
 | Task log | `COMPLETED_TASKS.md` |
-| Execution guidance | AI follows Sentinel AI MemoryCore OS rules directly |
+| Human notes policy | `memory-policy/human-notes-ingestion.md` |
+| Execution guidance | AI follows Sentinel AI Core rules directly |
 
 ## Maintenance protocol
 
@@ -94,8 +108,9 @@ After a meaningful completed task or architecture change:
 - Append milestones to [`main/project-history.md`](main/project-history.md) only for real milestones.
 - Promote durable rules to [`main/architectural-directives.md`](main/architectural-directives.md).
 - Update [`main/relationship-memory.md`](main/relationship-memory.md) only when schema, entity, or access relationships change.
+- Apply [`memory-policy/human-notes-ingestion.md`](memory-policy/human-notes-ingestion.md) before drafting or accepting human notes updates.
 - Apply [`memory-policy/write-filter.md`](memory-policy/write-filter.md) and [`memory-policy/promotion-rules.md`](memory-policy/promotion-rules.md) before writing memory.
 
 ## Version
 
-- Layout: AI MemoryCore OS migration baseline (2026-05-02).
+- Layout: Human notes integration baseline (2026-05-04).

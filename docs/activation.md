@@ -10,8 +10,8 @@ To use it correctly, Sentinel AI must be activated first.
 If you clone the repository yourself, use this flow:
 
 ```bash
-git clone https://github.com/shzdev/Sentinel-AI-Memory.git
-cd Sentinel-AI-Memory
+git clone https://github.com/shzdev/Sentinel-AI-Core.git
+cd Sentinel-AI-Core
 ```
 
 Then start your AI session with:
@@ -65,7 +65,7 @@ If you are asking an AI coding agent to clone and set up the repository, use thi
 
 ```text
 Clone and set up this repository:
-https://github.com/shzdev/Sentinel-AI-Memory.git
+https://github.com/shzdev/Sentinel-AI-Core.git
 
 After cloning, activate Sentinel AI by reading:
 .sentinel-ai/boot-instruction.md
@@ -73,7 +73,7 @@ After cloning, activate Sentinel AI by reading:
 Then read:
 .sentinel-ai/master-memory.md
 
-Follow Sentinel AI MemoryCore OS rules before making any changes.
+Follow Sentinel AI Core rules before making any changes.
 Do not modify files until you understand the system.
 ```
 
@@ -95,6 +95,11 @@ Sentinel AI works best with three layers:
 - Repository structure: `.sentinel-ai/`, `tasks/`, `docs/`
 - Boot command: `Activate Sentinel AI`
 - AI coding instruction: [`docs/ai-coding-instruction.md`](ai-coding-instruction.md)
+
+`tasks/todo.md` is the human task queue and is not durable memory.
+`tasks/todo.md` may include Sentinel-generated suggestions or drafts.
+`tasks/lessons.md` is the accepted lesson bank and only receives approved lessons from clear events.
+`tasks/lessons.md` entries include a required `Type` field and only some accepted lessons are promoted into durable memory.
 
 Auto-activation is possible only when the AI agent has file access.
 Manual activation remains the fallback.

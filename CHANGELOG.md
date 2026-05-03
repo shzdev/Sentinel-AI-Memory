@@ -1,9 +1,19 @@
 # Changelog
 
+## v1.1.0 (Unreleased)
+
+### Human Notes Integration
+- Wired `tasks/todo.md` as the human task queue for Sentinel suggestions and drafts.
+- Defined `tasks/lessons.md` as the governed accepted lesson bank.
+- Added human-notes ingestion policy and load rules in the Sentinel router.
+- Added lesson `Type` tagging and duplicate-guard guidance.
+- Added v1.1 release notes and release-checklist Human Notes Integration checks.
+- Kept learning filtered, approved, and local-only.
+
 ## v1.0.0
 
 ### Core OS
-- Stabilized the Sentinel AI MemoryCore OS release surface.
+- Stabilized the Sentinel AI Core release surface.
 - Kept `.sentinel-ai/` as the authoritative core operating system.
 
 ### Activation System

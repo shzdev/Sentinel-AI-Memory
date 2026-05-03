@@ -5,7 +5,7 @@
     "riskLevel": "low"
   },
   "architecture-audit": {
-    "keywords": ["architecture", "audit", "load order", "memorycore"],
+    "keywords": ["architecture", "audit", "load order", "core"],
     "recommendedExtensions": ["architecture-auditor"],
     "riskLevel": "medium"
   },

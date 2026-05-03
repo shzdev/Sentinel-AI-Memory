@@ -16,6 +16,11 @@ Use this checklist before publishing a Sentinel AI release.
 - Canonical instruction is updated
 - CHANGELOG exists
 - Release notes exist
+- Human Notes Integration is documented
+- `tasks/todo.md` was reviewed for release blockers
+- `tasks/lessons.md` was reviewed for accepted lessons and selective promotion only
+- No todo item was promoted directly into durable memory
+- Any promoted lesson passed memory policy and write filter
 - No `extensions/skills/openai-compatible/` directory exists
 
 ## Notes

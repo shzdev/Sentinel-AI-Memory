@@ -1,4 +1,4 @@
-# Getting Started - Sentinel AI MemoryCore OS
+# Getting Started - Sentinel AI Core
 
 ## 1. Copy Core System
 
@@ -8,6 +8,11 @@ Copy the following into your project root:
 .sentinel-ai/
 tasks/
 ```
+
+`tasks/todo.md` is the human task queue.
+`tasks/todo.md` is not durable memory.
+`tasks/lessons.md` is the governed lesson bank for approved lessons only.
+Lesson entries include a required `Type` field.
 
 ---
 
@@ -95,6 +100,8 @@ AI will:
 * NOT store trivial changes
 * ONLY store high-impact decisions
 * Maintain clean long-term memory
+* Treat `tasks/todo.md` as suggestions/drafts and `tasks/lessons.md` as approved lessons only
+* Promote accepted lessons selectively, not automatically
 
 ---
 

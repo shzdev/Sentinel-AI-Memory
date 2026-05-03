@@ -31,4 +31,10 @@ Optional / task-specific:
 
 - `relationship-memory.md`
 - `project-history.md`
+- `tasks/todo.md`
 - `tasks/lessons.md`
+
+`tasks/todo.md` is the human task queue and may include Sentinel-generated suggestions or drafts.
+`tasks/todo.md` is not durable memory.
+`tasks/lessons.md` is the accepted lesson bank and should only contain approved lessons from clear events.
+`tasks/lessons.md` entries include a required `Type` field, and promotion into durable memory is selective.

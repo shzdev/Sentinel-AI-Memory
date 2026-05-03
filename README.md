@@ -1,11 +1,11 @@
-# Sentinel AI MemoryCore OS v1.0.0
+# Sentinel AI Core v1.0.0
 
 Structured AI development operating system for disciplined, risk-aware execution.
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-stable-success)
 ![AI System](https://img.shields.io/badge/type-AI%20Operating%20System-purple)
-![Architecture](https://img.shields.io/badge/architecture-MemoryCore%20OS-orange)
+![Architecture](https://img.shields.io/badge/architecture-Core%20OS-orange)
 
 ## Quick Start
 
@@ -16,8 +16,8 @@ Structured AI development operating system for disciplined, risk-aware execution
 Example:
 
 ```bash
-git clone https://github.com/shzdev/Sentinel-AI-Memory.git
-cd Sentinel-AI-Memory
+git clone https://github.com/shzdev/Sentinel-AI-Core.git
+cd Sentinel-AI-Core
 ```
 
 ```text
@@ -192,6 +192,26 @@ sentinel resolve "Improve README onboarding"
 sentinel resolve "Improve README onboarding" --explain
 ```
 
+## Human Notes Integration
+
+Sentinel uses `tasks/` in a governed way:
+
+- `tasks/todo.md` is the human task queue and is not durable memory.
+- `tasks/todo.md` may contain Sentinel-generated suggestions and drafts.
+- `tasks/lessons.md` is the accepted lesson bank.
+- `tasks/lessons.md` only receives lessons after a clear event and human approval.
+- Lesson entries include a required `Type` field.
+- Not every accepted lesson is promoted into durable memory.
+- Both files are optional references, not unfiltered memory shards.
+
+Suggested flow:
+
+1. Sentinel observes the task or failure.
+2. Sentinel suggests a task, reminder, or lesson draft.
+3. Human accepts, edits, or rejects the suggestion.
+4. Sentinel writes only the approved result.
+5. Only lessons that meet the memory policy are promoted into durable memory.
+
 ## Custom Activation Name
 
 Sentinel AI can also use a custom activation name in addition to the canonical:
@@ -360,7 +380,9 @@ See:
   - openai-skills-compatibility.md
   - v2-architecture.md
 - extensions/                  Optional registry-driven ecosystem
-- tasks/                       Task notes and supporting material
+- tasks/                       Human task queue and approved lesson bank
+  - todo.md
+  - lessons.md
 - templates/                   Reusable project starter templates
 - tools/                       Local tooling, including sentinel-cli
   - sentinel-cli/
@@ -371,7 +393,7 @@ See:
 
 ## Credits
 
-Sentinel AI MemoryCore OS is built around a core operating system plus optional extension tooling.
+Sentinel AI Core is built around a core operating system plus optional extension tooling.
 The release structure in this repository keeps the core authoritative and the extension layer optional.
 
 ## License
