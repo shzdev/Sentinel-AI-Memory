@@ -26,6 +26,138 @@ Activate Sentinel AI
 
 You can combine activation and task in one message.
 
+## Architecture
+
+```text
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   PROJECT SENTINEL AI                                       │
+│                               Governed AI Operating Layer                                   │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────┐
+│  USER REQUEST  │
+└───────┬───────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                 ACTIVATION / INPUT LAYER                                    │
+│                                                                                              │
+│  Canonical:  "Activate Sentinel AI"                                                         │
+│  Custom:      "hey puteri" / "hi puteri" / "puteri activate"                                │
+│                                                                                              │
+│  Purpose: detect activation, normalize input, and route into the same core flow             │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  SENTINEL CORE AUTHORITY                                    │
+│                                                                                              │
+│  .sentinel-ai/                                                                                │
+│  ├─ boot-instruction.md                                                                      │
+│  ├─ master-memory.md                                                                         │
+│  ├─ main/*                                                                                   │
+│  ├─ decision-engine/*                                                                        │
+│  ├─ governance/*                                                                             │
+│  └─ memory-policy/*                                                                          │
+│                                                                                              │
+│  Core rules always win. Extensions are optional. Resolver is advisory.                      │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    DECISION ENGINE                                           │
+│                                                                                              │
+│  +------------------+     +------------------+     +------------------+                      │
+│  | Confidence Score | --> |   Mode Select    | --> |   Hard Stop      |                      │
+│  |      1 - 5       |     | Light / Architect|     | if needed        |                      │
+│  +------------------+     +------------------+     +------------------+                      │
+│                                                                                              │
+│  Light Mode      = small, clear, low-risk tasks                                              │
+│  Architect Mode   = complex, unclear, risky, multi-file tasks                                │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        ├───────────────────────────────────────────────────────────────┐
+        │                                                               │
+        v                                                               v
+┌───────────────────────────────┐                          ┌───────────────────────────────────┐
+│        MEMORY MANAGER         │                          │        OPTIONAL EXTENSIONS        │
+│                               │                          │                                   │
+│  - retrieve context           │                          │  extensions/                      │
+│  - keep durable memory        │                          │  ├─ skills                        │
+│  - avoid noise                │                          │  ├─ agents                        │
+│  - store only high-value      │                          │  ├─ workflows                     │
+│    updates                    │                          │  └─ resolver                      │
+└───────────────┬───────────────┘                          │                                   │
+                │                                          │  Optional only. No authority.    │
+                │                                          └───────────────┬───────────────────┘
+                │                                                          │
+                │                                                          v
+                │                                          ┌───────────────────────────────────┐
+                │                                          │       AUTO EXTENSION RESOLVER     │
+                │                                          │                                   │
+                │                                          │  - registry-aware                 │
+                │                                          │  - task intent matching          │
+                │                                          │  - rank candidates               │
+                │                                          │  - advisory recommendation only   │
+                │                                          └───────────────┬───────────────────┘
+                │                                                          │
+                │                                                          v
+                │                                          ┌───────────────────────────────────┐
+                │                                          │     SKILL / AGENT / WORKFLOW      │
+                │                                          │                                   │
+                │                                          │  Sentinel-native only             │
+                │                                          │  Imported external skills         │
+                │                                          │  are normalized before storage    │
+                │                                          └───────────────┬───────────────────┘
+                │                                                          │
+                └──────────────────────────────────────────────────────────┘
+                                                                           │
+                                                                           v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                        EXECUTION                                              │
+│                                                                                              │
+│  Apply rules -> implement changes -> keep scope narrow -> avoid fragile logic                │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                       VERIFICATION                                            │
+│                                                                                              │
+│  - validate output                                                                            │
+│  - check for regressions                                                                      │
+│  - confirm requested task is actually solved                                                  │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   RESPONSE / OUTPUT                                           │
+│                                                                                              │
+│  Return the result clearly, with mode/confidence if relevant                                  │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                MEMORY WRITE FILTER                                            │
+│                                                                                              │
+│  Temporary detail      -> ignore                                                              │
+│  Formatting tweak      -> ignore                                                              │
+│  Architecture decision  -> store                                                               │
+│  Durable milestone      -> store                                                               │
+└───────┬──────────────────────────────────────────────────────────────────────────────────────┘
+        │
+        v
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  FILTERED PERSISTENT MEMORY                                   │
+│                                                                                              │
+│  main/current-session.md                                                                      │
+│  main/architectural-directives.md                                                             │
+│  main/project-history.md                                                                      │
+│  main/relationship-memory.md                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+Sentinel Core remains the authority. Extensions are optional. Resolver is advisory.
+
 ## Activation
 
 Activation tells the AI to load the Sentinel core before making changes.
